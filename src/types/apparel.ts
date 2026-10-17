@@ -1,6 +1,6 @@
 export type CameraViewPreset = 'FULL_FIT' | 'CHEST_MACRO' | 'BACK_VIEW' | 'DENIM_STACKS';
 
-export type ModelSource = 'PROCEDURAL' | 'SKETCHFAB_PACK' | 'CUSTOM_UPLOAD';
+export type ModelSource = 'HOODIE_3D' | 'TSHIRT_3D' | 'PROCEDURAL_CO_ORD' | 'SKETCHFAB_PACK' | 'CUSTOM_UPLOAD';
 
 export type FinishType = 'flat' | 'puff';
 

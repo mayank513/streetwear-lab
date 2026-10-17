@@ -7,6 +7,7 @@ import {
   Box, 
   Camera,
   Layers,
+  Shirt,
   Sparkles
 } from 'lucide-react';
 import { useCustomizerStore } from '../../store/useCustomizerStore';
@@ -84,66 +85,58 @@ export default function Header() {
       </div>
 
       {/* 3D Model Mode Switcher (ThreadLab Segmented Controls) */}
-      <div className="hidden md:flex items-center gap-1 p-1 rounded-full bg-[#12141a]/90 border border-white/10 backdrop-blur-md pointer-events-auto shadow-xl">
+      <div className="hidden md:flex items-center gap-1 p-1 rounded-full bg-[#12141a]/90 border border-white/10 backdrop-blur-md pointer-events-auto shadow-2xl">
+        <button
+          onClick={() => setModelSource('HOODIE_3D')}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+            modelSource === 'HOODIE_3D'
+              ? 'bg-[#d4ff00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]'
+              : 'text-white/60 hover:text-white'
+          }`}
+          title="3D Heavyweight Oversized Hoodie (.GLB)"
+        >
+          <Sparkles size={12} />
+          <span>3D HOODIE</span>
+        </button>
+
+        <button
+          onClick={() => setModelSource('TSHIRT_3D')}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+            modelSource === 'TSHIRT_3D'
+              ? 'bg-[#d4ff00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]'
+              : 'text-white/60 hover:text-white'
+          }`}
+          title="3D Oversized Streetwear T-Shirt (.GLB)"
+        >
+          <Shirt size={12} />
+          <span>3D T-SHIRT</span>
+        </button>
+
+        <button
+          onClick={() => setModelSource('PROCEDURAL_CO_ORD')}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+            modelSource === 'PROCEDURAL_CO_ORD'
+              ? 'bg-[#d4ff00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]'
+              : 'text-white/60 hover:text-white'
+          }`}
+          title="Full Co-ord with Baggy Carpenter Denim"
+        >
+          <Layers size={12} />
+          <span>FULL CO-ORD</span>
+        </button>
+
         <button
           onClick={() => setModelSource('SKETCHFAB_PACK')}
-          className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
             modelSource === 'SKETCHFAB_PACK'
               ? 'bg-[#d4ff00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]'
               : 'text-white/60 hover:text-white'
           }`}
+          title="Sketchfab Tactical Clothing Pack (Marko1937)"
         >
           <Box size={12} />
-          <span>SKETCHFAB ASSET PACK</span>
+          <span>SKETCHFAB PACK</span>
         </button>
-
-        <button
-          onClick={() => setModelSource('PROCEDURAL')}
-          className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
-            modelSource === 'PROCEDURAL'
-              ? 'bg-[#d4ff00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]'
-              : 'text-white/60 hover:text-white'
-          }`}
-        >
-          <Layers size={12} />
-          <span>ATELIER 480 STUDIO</span>
-        </button>
-
-        {/* If in Atelier Studio mode, allow switching garment silhouette */}
-        {modelSource === 'PROCEDURAL' && (
-          <div className="flex items-center gap-1 pl-2 border-l border-white/15">
-            <button
-              onClick={() => setDisplayMode('FULL_COMBO')}
-              className={`px-2 py-0.5 rounded text-[10px] font-mono transition-all cursor-pointer ${
-                displayMode === 'FULL_COMBO'
-                  ? 'bg-white/20 text-white font-semibold'
-                  : 'text-white/40 hover:text-white'
-              }`}
-            >
-              CO-ORD
-            </button>
-            <button
-              onClick={() => setDisplayMode('HOODIE_ONLY')}
-              className={`px-2 py-0.5 rounded text-[10px] font-mono transition-all cursor-pointer ${
-                displayMode === 'HOODIE_ONLY'
-                  ? 'bg-white/20 text-white font-semibold'
-                  : 'text-white/40 hover:text-white'
-              }`}
-            >
-              HOODIE
-            </button>
-            <button
-              onClick={() => setDisplayMode('JEANS_ONLY')}
-              className={`px-2 py-0.5 rounded text-[10px] font-mono transition-all cursor-pointer ${
-                displayMode === 'JEANS_ONLY'
-                  ? 'bg-white/20 text-white font-semibold'
-                  : 'text-white/40 hover:text-white'
-              }`}
-            >
-              JEANS
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Action Tools */}

@@ -100,7 +100,7 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
   jeansWash: 'ACID_BLACK',
   distressLevel: 'clean',
 
-  modelSource: 'SKETCHFAB_PACK', // Default or user-selectable!
+  modelSource: 'HOODIE_3D', // Default to real 3D Hoodie model that changes color dynamically!
   customModelUrl: null,
   customModelName: null,
 

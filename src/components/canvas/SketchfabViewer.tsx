@@ -78,11 +78,11 @@ export default function SketchfabViewer() {
 
           {/* Switch back to Atelier 3D Customizer */}
           <button
-            onClick={() => setModelSource('PROCEDURAL')}
+            onClick={() => setModelSource('HOODIE_3D')}
             className="w-full mt-2 py-1.5 text-center text-[10px] text-white/50 hover:text-[#d4ff00] transition-colors cursor-pointer flex items-center justify-center gap-1"
           >
             <RefreshCw size={11} />
-            <span>SWITCH TO ATELIER 480 HOODIE & JEANS STUDIO</span>
+            <span>SWITCH TO 3D HOODIE COLOR CUSTOMIZER</span>
           </button>
         </div>
       )}

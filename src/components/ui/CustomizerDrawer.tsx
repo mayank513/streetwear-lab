@@ -54,11 +54,21 @@ export default function CustomizerDrawer() {
     getDistressAddonPrice,
     setIsOrderSuccessOpen,
     zenMode,
+    modelSource,
+    setModelSource,
   } = useCustomizerStore();
 
   const [isOpen, setIsOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'HOODIE' | 'DENIM' | 'GRAPHICS' | 'EXPLODE' | 'STUDIO'>('HOODIE');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-switch to interactive 3D model if on Sketchfab embed
+  const handleColorChange = (hex: string) => {
+    setHoodieColor(hex);
+    if (modelSource === 'SKETCHFAB_PACK') {
+      setModelSource('HOODIE_3D');
+    }
+  };
 
   if (zenMode) return null;
 
@@ -171,6 +181,46 @@ export default function CustomizerDrawer() {
             {/* ──────────────────────────────────────────────────────── */}
             {activeTab === 'HOODIE' && (
               <div className="space-y-4">
+                {/* Active 3D Model Selector Indicator */}
+                <div className="p-2.5 rounded-xl bg-black/50 border border-white/10 flex items-center justify-between text-xs font-mono">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#d4ff00] animate-pulse" />
+                    <span className="text-white/60 text-[10px]">3D CANVAS:</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => setModelSource('HOODIE_3D')}
+                      className={`px-2 py-0.5 rounded text-[10px] transition-all cursor-pointer ${
+                        modelSource === 'HOODIE_3D'
+                          ? 'bg-[#d4ff00] text-black font-bold'
+                          : 'text-white/60 hover:text-white bg-white/5'
+                      }`}
+                    >
+                      3D HOODIE
+                    </button>
+                    <button
+                      onClick={() => setModelSource('TSHIRT_3D')}
+                      className={`px-2 py-0.5 rounded text-[10px] transition-all cursor-pointer ${
+                        modelSource === 'TSHIRT_3D'
+                          ? 'bg-[#d4ff00] text-black font-bold'
+                          : 'text-white/60 hover:text-white bg-white/5'
+                      }`}
+                    >
+                      3D TEE
+                    </button>
+                    <button
+                      onClick={() => setModelSource('PROCEDURAL_CO_ORD')}
+                      className={`px-2 py-0.5 rounded text-[10px] transition-all cursor-pointer ${
+                        modelSource === 'PROCEDURAL_CO_ORD'
+                          ? 'bg-[#d4ff00] text-black font-bold'
+                          : 'text-white/60 hover:text-white bg-white/5'
+                      }`}
+                    >
+                      CO-ORD
+                    </button>
+                  </div>
+                </div>
+
                 <div>
                   <div className="flex items-center justify-between text-xs font-mono text-white/70 mb-2">
                     <span>FABRIC DYE FORMULATION</span>
@@ -184,7 +234,7 @@ export default function CustomizerDrawer() {
                       return (
                         <button
                           key={swatch.name}
-                          onClick={() => setHoodieColor(swatch.hex)}
+                          onClick={() => handleColorChange(swatch.hex)}
                           className={`group relative aspect-square rounded-full flex items-center justify-center transition-all cursor-pointer ${
                             isSelected
                               ? 'ring-2 ring-[#d4ff00] ring-offset-2 ring-offset-[#0f1117] scale-105'
@@ -215,13 +265,13 @@ export default function CustomizerDrawer() {
                     <input
                       type="color"
                       value={hoodieColor}
-                      onChange={(e) => setHoodieColor(e.target.value)}
+                      onChange={(e) => handleColorChange(e.target.value)}
                       className="w-9 h-9 rounded-lg border border-white/10 bg-transparent cursor-pointer p-0.5"
                     />
                     <input
                       type="text"
                       value={hoodieColor.toUpperCase()}
-                      onChange={(e) => setHoodieColor(e.target.value)}
+                      onChange={(e) => handleColorChange(e.target.value)}
                       className="flex-1 px-3 py-1.5 rounded-lg bg-black/40 border border-white/10 text-xs font-mono text-white tracking-widest focus:border-[#d4ff00] outline-none"
                     />
                   </div>
